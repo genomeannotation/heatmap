@@ -53,7 +53,12 @@ fn main() {
                     row_max[x]
                 };
             let cell = matrix[y][x]/max_cell * 255.0;
-            img.put_pixel(x as u32, y as u32, Luma([cell as u8]));
+            if cell == 255.0 {
+                // Zero out white diagonal
+                img.put_pixel(x as u32, y as u32, Luma([0u8]));
+            } else {
+                img.put_pixel(x as u32, y as u32, Luma([cell as u8]));
+            }
         }
     }
 
